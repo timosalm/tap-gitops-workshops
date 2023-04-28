@@ -5,7 +5,7 @@ kind: TrainingPortal
 metadata:
   name: prod
   annotations:
-    kapp.k14s.io/update-strategy: always-replace
+    kapp.k14s.io/update-strategy: fallback-on-replace
 spec:
   portal:
     title: End to End Workshops

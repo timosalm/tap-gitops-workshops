@@ -1,3 +1,29 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: workshops-gitops
+rules:
+- apiGroups:
+  - learningcenter.tanzu.vmware.com
+  resources:
+  - '*'
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: workshops-gitops-default
+  namespace: tap-install
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: workshops-gitops
+subjects:
+  - kind: ServiceAccount
+    namespace: tap-install
+    name: default
+---
 apiVersion: kappctrl.k14s.io/v1alpha1
 kind: App
 metadata:
@@ -15,6 +41,7 @@ spec:
       - secretRef:
           name: workshops-values
   template:
-  - ytt: {}
+  - ytt:
+      ignoreUnknownComments: true
   deploy:
   - kapp: {}
