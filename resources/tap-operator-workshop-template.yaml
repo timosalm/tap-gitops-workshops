@@ -118,6 +118,7 @@ spec:
         - serving.knative.dev
         - packaging.carvel.dev
         - pkg.crossplane.io
+        - projectcontour.io
         - services.apps.tanzu.vmware.com
         - source.toolkit.fluxcd.io
         resources:
