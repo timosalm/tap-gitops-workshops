@@ -47,7 +47,7 @@ spec:
     reserved: 1
     expires: 2h
     orphaned: 1h
-  - name: tap-operator-workshop
+  - name: tap-operator
     capacity: 40
     reserved: 2
     expires: 2h
