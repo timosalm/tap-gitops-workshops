@@ -72,7 +72,31 @@ spec:
           - kind: ServiceAccount
             name: default
             namespace: $(session_namespace)
-
+      # Permissions for session
+      - apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRole
+        metadata:
+          name: $(session_namespace)-session-cr
+        rules:
+        - apiGroups:
+          - carto.run
+          resources:
+          - workloads
+          verbs:
+          - '*'
+      - apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRoleBinding
+        metadata:
+          name: $(session_namespace)-session-rb
+          namespace: $(session_namespace)
+        roleRef:
+          apiGroup: rbac.authorization.k8s.io
+          kind: ClusterRole
+          name: $(session_namespace)-session-cr
+        subjects:
+          - kind: ServiceAccount
+            namespace: $(workshop_namespace)
+            name: $(service_account)
       # Install grype
       - apiVersion: packaging.carvel.dev/v1alpha1
         kind: PackageInstall
