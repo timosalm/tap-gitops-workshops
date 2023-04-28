@@ -1,0 +1,12 @@
+# GitOps installation of Learning Center workshops
+
+Copy values-example.yaml to values.yaml and fill out all configuration values.
+Apply them in a secrte to a cluster.
+```
+kubectl create secret generic workshops-values --from-file=values.yaml=values.yaml -n tap-install
+```
+
+Apply the kapp-controller App to the cluster.
+```
+kubectl apply -f gitops-app.yaml
+```

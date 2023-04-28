@@ -1,0 +1,29 @@
+#@data/values
+---
+container_registry:
+  hostname: harbor.example.com
+  username: my-user
+  password: 
+  repository: tap-wkld
+workshop_git:
+  username: tsalm-vmware
+  branch: main
+tap:
+  ingress_domain: tap.example.com
+  product_docs_base_url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap
+gitops:
+  host: https://github.com
+  username: tsalm-vmware
+  password: 
+metadatastore:
+  accesstoken: # export METADATA_STORE_ACCESS_TOKEN=$(kubectl get secrets metadata-store-read-write-client -n metadata-store -o jsonpath="{.data.token}" | base64 -d)
+gitea:
+  https_repository_prefix: "https://gitea.example.com/gitea_admin"
+  basic_auth_username: gitea_admin
+  basic_auth_password: 
+# optional 
+learning_center_portal:
+  adminPassword: 
+  robotPassword: 
+  robotClientId: 
+  robotClientSecret: 

@@ -1,0 +1,20 @@
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: workshops-gitops
+  namespace: tap-install
+spec:
+  serviceAccountName: default
+  fetch:
+  - git:
+      url: https://github.com/tsalm-vmware/tap-gitops-workshops.git
+      ref: origin/main
+      subPath: resources
+  - inline:
+      pathsFrom:
+      - secretRef:
+          name: workshops-values
+  template:
+  - ytt: {}
+  deploy:
+  - kapp: {}
