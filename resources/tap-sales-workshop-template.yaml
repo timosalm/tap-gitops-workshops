@@ -38,15 +38,6 @@ spec:
     - name: CONTAINER_REGISTRY_REPOSITORY
       value: #@ data.values.container_registry.repository
     objects:
-      - apiVersion: v1
-        kind: LimitRange
-        metadata:
-          name: resource-limits
-        spec:
-          limits:
-            - type: PersistentVolumeClaim
-              max:
-                storage: 10Gi
       # Permissions for tap-sa (Supply Chain)
       - apiVersion: rbac.authorization.k8s.io/v1
         kind: RoleBinding
@@ -84,6 +75,12 @@ spec:
           - workloads
           verbs:
           - '*'
+        - apiGroups:
+          - ""
+          resources:
+          - namespaces
+          verbs:
+          - 'patch'
       - apiVersion: rbac.authorization.k8s.io/v1
         kind: ClusterRoleBinding
         metadata:
@@ -124,6 +121,15 @@ spec:
             ---
             namespace: $(session_namespace)
             targetImagePullSecret: registry-credentials
+      # Resources
+      - apiVersion: v1
+        kind: Secret
+        metadata:
+          name: registry-credentials
+        type: kubernetes.io/dockerconfigjson
+        data:
+          #@ docker_creds = {"username": data.values.container_registry.username, "password": data.values.container_registry.password}
+          .dockerconfigjson: #@ base64.encode(json.encode({"auths": {data.values.container_registry.hostname: docker_creds}}))
       - apiVersion: v1
         kind: Secret
         metadata:
@@ -134,3 +140,38 @@ spec:
         stringData:
           username: #@ data.values.gitops.username
           password: #@ data.values.gitops.password
+      - apiVersion: tekton.dev/v1beta1
+        kind: Pipeline
+        metadata:
+          name: developer-defined-tekton-pipeline
+          labels:
+            apps.tanzu.vmware.com/pipeline: test     # (!) required
+        spec:
+          params:
+            - name: source-url                       # (!) required
+            - name: source-revision                  # (!) required
+            - name: source-sub-path
+              default: "."
+          tasks:
+            - name: test
+              params:
+                - name: source-url
+                  value: $(params.source-url)
+                - name: source-revision
+                  value: $(params.source-revision)
+                - name: source-sub-path
+                  value: $(params.source-sub-path)
+              taskSpec:
+                params:
+                  - name: source-url
+                  - name: source-revision
+                  - name: source-sub-path
+                steps:
+                  - name: test
+                    image: gradle
+                    script: |-
+                      cd `mktemp -d`
+
+                      wget -qO- $(params.source-url) | tar xvz -m
+                      cd $(params.source-sub-path)
+                      ./mvnw test
