@@ -4,7 +4,7 @@ container_registry:
   hostname: harbor.example.com
   username: my-user
   password: 
-  repository: tap-wkld
+  repository: tap-workshop-examples
 workshop_git:
   username: tsalm-vmware
   branch: main
