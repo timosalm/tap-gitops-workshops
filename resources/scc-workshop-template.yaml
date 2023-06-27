@@ -111,7 +111,7 @@ spec:
           resources: [customresourcedefinitions]
           verbs: ["get", "watch", "list"]
       - apiVersion: rbac.authorization.k8s.io/v1
-        kind: RoleBinding
+        kind: ClusterRoleBinding
         metadata:
           name: $(session_namespace)-cluster-resources-reader-rb
           namespace: $(session_namespace)
