@@ -30,14 +30,8 @@ spec:
     env: 
     - name: TAP_INGRESS
       value: #@ data.values.tap.ingress_domain
-    - name: TAP_CNRS_SUBDOMAIN
-      value: #@ data.values.tap.ingress_domain
     - name: CONTAINER_REGISTRY_HOSTNAME
       value: #@ data.values.container_registry.hostname
-    - name: CONTAINER_REGISTRY_USERNAME
-      value: #@ data.values.container_registry.username
-    - name: CONTAINER_REGISTRY_PASSWORD
-      value: #@ data.values.container_registry.password
     - name: CONTAINER_REGISTRY_REPOSITORY
       value: #@ data.values.container_registry.repository
     - name: GITOPS_REPOSITORY
@@ -144,6 +138,9 @@ spec:
         - apiGroups: [kpack.io]
           resources: [images]
           verbs: ['*']
+        - apiGroups: ['*']
+          resources: ['*']
+          verbs: ["get", "watch", "list"]
       - apiVersion: rbac.authorization.k8s.io/v1
         kind: RoleBinding
         metadata:
