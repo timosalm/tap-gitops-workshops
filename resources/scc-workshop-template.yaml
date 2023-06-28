@@ -278,4 +278,4 @@ spec:
             git:
               ref:
                 branch: main
-              url: https://github.com/tsalm-vmware/spring-boot-hello-world.git
+              url: https://github.com/timosalm/spring-boot-hello-world.git
