@@ -1,0 +1,37 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: learningcenter.tanzu.vmware.com/v1beta1
+kind: TrainingPortal
+metadata:
+  name: workshops
+  annotations:
+    kapp.k14s.io/update-strategy: fallback-on-replace
+spec:
+  portal:
+    sessions:
+      maximum: 50
+    updates:
+      workshop: true
+    title: Interactive Workshops for VMware Tanzu
+    registration:
+      type: one-step
+      enabled: false
+    #@ if data.values.learning_center_portal:
+    credentials:
+      admin:
+        username: admin
+        password: #@ data.values.learning_center_portal.adminPassword
+      robot:
+        username: robot-user
+        password: #@ data.values.learning_center_portal.robotPassword
+    clients:
+      robot:
+        id: #@ data.values.learning_center_portal.robotClientId
+        secret: #@ data.values.learning_center_portal.robotClientSecret
+    #@ end
+  workshops:
+  - name: devx-platform
+    capacity: 40
+    reserved: 1
+    expires: 3h
+    orphaned: 1h
