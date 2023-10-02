@@ -16,7 +16,7 @@ spec:
     registration:
       type: one-step
       enabled: false
-    #@ if data.values.learning_center_portal:
+    #@ if hasattr(data.values, "learning_center_portal"):
     credentials:
       admin:
         username: admin
