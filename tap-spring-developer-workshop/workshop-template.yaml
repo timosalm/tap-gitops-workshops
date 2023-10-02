@@ -137,7 +137,6 @@ spec:
         - kind: ServiceAccount
           namespace: $(workshop_namespace)
           name: $(service_account)
-    # Resources
     - apiVersion: apps/v1
       kind: Deployment
       metadata:
