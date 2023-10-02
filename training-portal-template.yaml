@@ -35,3 +35,8 @@ spec:
     reserved: 1
     expires: 3h
     orphaned: 1h
+  - name: tap-spring-dev-workshop
+    capacity: 40
+    reserved: 1
+    expires: 3h
+    orphaned: 1h
