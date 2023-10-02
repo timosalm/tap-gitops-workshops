@@ -16,18 +16,18 @@ spec:
     registration:
       type: one-step
       enabled: false
-    #@ if hasattr(data.values, "learning_center_portal"):
+    #@ if hasattr(data.values, "training_portal"):
     credentials:
       admin:
         username: admin
-        password: #@ data.values.learning_center_portal.adminPassword
+        password: #@ data.values.training_portal.adminPassword
       robot:
         username: robot-user
-        password: #@ data.values.learning_center_portal.robotPassword
+        password: #@ data.values.training_portal.robotPassword
     clients:
       robot:
-        id: #@ data.values.learning_center_portal.robotClientId
-        secret: #@ data.values.learning_center_portal.robotClientSecret
+        id: #@ data.values.training_portal.robotClientId
+        secret: #@ data.values.training_portal.robotClientSecret
     #@ end
   workshops:
   - name: devx-platform
