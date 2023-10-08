@@ -36,7 +36,6 @@ spec:
     - name: CONTAINER_REGISTRY_REPOSITORY
       value: #@ data.values.container_registry.repository
     objects:
-      # Permissions for session
       - apiVersion: rbac.authorization.k8s.io/v1
         kind: ClusterRole
         metadata:
