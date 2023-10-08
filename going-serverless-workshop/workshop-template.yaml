@@ -2,7 +2,7 @@
 #@ load("@ytt:base64", "base64")
 #@ load("@ytt:json", "json")
 ---
-apiVersion: learningcenter.tanzu.vmware.com/v1beta1
+apiVersion: training.educates.dev/v1beta1
 kind: Workshop
 metadata:
   name: going-serverless
