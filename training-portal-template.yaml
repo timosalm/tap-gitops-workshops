@@ -30,13 +30,58 @@ spec:
         secret: #@ data.values.training_portal.robotClientSecret
     #@ end
   workshops:
+  - name: tap-spring-dev-workshop
+    capacity: 40
+    reserved: 1
+    expires: 3h
+    orphaned: 1h
+  - name: tap-operator
+    capacity: 40
+    reserved: 1
+    expires: 3h
+    orphaned: 1h
   - name: devx-platform
     capacity: 40
     reserved: 1
     expires: 3h
     orphaned: 1h
-  - name: tap-spring-dev-workshop
+  - name: sales-workshop
+    capacity: 40
+    reserved: 1
+    expires: 2h
+    orphaned: 1h
+  - name: tap-carvel-workshop
+    capacity: 40
+    reserved: 1
+    expires: 2h
+    orphaned: 1h
+  - name: scc-workshop
+    capacity: 40
+    reserved: 1
+    expires: 2h
+    orphaned: 1h
+  - name: going-serverless
     capacity: 40
     reserved: 1
     expires: 3h
+    orphaned: 1h
+  - name: bootiful-kubernetes-operators
+    capacity: 40
+    reserved: 1
+    expires: 2h
+    orphaned: 1h
+  - name: cnr-fundamentals
+    capacity: 40
+    reserved: 1
+    expires: 2h
+    orphaned: 1h
+  - name: cnr-serving-advanced
+    capacity: 40
+    reserved: 1
+    expires: 2h
+    orphaned: 1h
+  - name:  cnr-eventing-advanced
+    capacity: 40
+    reserved: 1
+    expires: 2h
     orphaned: 1h
