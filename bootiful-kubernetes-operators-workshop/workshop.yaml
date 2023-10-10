@@ -14,6 +14,24 @@ spec:
       includePaths:
       - /workshop/**
       - /samples/**
+  environment:
+    objects:
+    - apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: kapp-installer
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: kapp-installer-$(workshop_namespace)
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: kapp-installer
+          namespace: $(workshop_namespace)
   session:
     resources:
       memory: 10Gi
@@ -46,78 +64,6 @@ spec:
     - name: admin-credentials-config
       mountPath: /opt/kubeconfig
     objects:
-    - apiVersion: v1
-      kind: ServiceAccount
-      metadata:
-        name: kapp-installer
-        namespace: $(workshop_namespace)
-    - apiVersion: rbac.authorization.k8s.io/v1
-      kind: Role
-      metadata:
-        name: vcluster-provisioner
-        namespace: $(workshop_namespace)
-      rules:
-      - apiGroups:
-        - ""
-        resources:
-        - configmaps
-        - services
-        - serviceaccounts
-        verbs:
-        - '*'
-    - apiVersion: rbac.authorization.k8s.io/v1
-      kind: RoleBinding
-      metadata:
-        name: vcluster-provisioner-rb
-        namespace: $(workshop_namespace)
-      roleRef:
-        apiGroup: rbac.authorization.k8s.io
-        kind: Role
-        name: vcluster-provisioner
-      subjects:
-      - kind: ServiceAccount
-        name: kapp-installer
-        namespace: $(workshop_namespace)
-    - apiVersion: rbac.authorization.k8s.io/v1
-      kind: Role
-      metadata:
-        name: vcluster-provisioner
-        namespace: $(session_namespace)
-      rules:
-      - apiGroups:
-        - ""
-        resources:
-        - configmaps
-        - services
-        - serviceaccounts
-        verbs:
-        - '*'
-      - apiGroups:
-        - apps
-        resources:
-        - statefulsets
-        verbs:
-        - '*'
-      - apiGroups:
-        - rbac.authorization.k8s.io
-        resources:
-        - roles
-        - rolebindings
-        verbs:
-        - '*'
-    - apiVersion: rbac.authorization.k8s.io/v1
-      kind: RoleBinding
-      metadata:
-        name: vcluster-provisioner-rb
-        namespace: $(session_namespace)
-      roleRef:
-        apiGroup: rbac.authorization.k8s.io
-        kind: Role
-        name: vcluster-provisioner
-      subjects:
-      - kind: ServiceAccount
-        name: kapp-installer
-        namespace: $(workshop_namespace)
     - apiVersion: v1
       kind: Secret
       metadata:
