@@ -8,9 +8,14 @@ spec:
   difficulty: intermediate
   duration: 15m
   url: https://github.com/timosalm/cnr-eventing-advanced
-  content:
-    image: ghcr.io/clue2solve/knative-workshop-eduk8s:latest
-    files: github.com/timosalm/cnr-eventing-advanced
+  workshop:
+    image: ghcr.io/timosalm/cnr-eventing-advanced:main
+    files:
+    - git:
+        url: https://github.com/timosalm/cnr-eventing-advanced
+        ref: origin/main
+      includePaths:
+      - /workshop/**
   session:
     namespaces:
       budget: xxx-large
