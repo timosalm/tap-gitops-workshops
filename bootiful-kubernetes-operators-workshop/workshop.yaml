@@ -51,6 +51,31 @@ spec:
       metadata:
         name: kapp-installer
         namespace: $(workshop_namespace)
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: Role
+      metadata:
+        name: vcluster-provisioner
+        namespace: $(workshop_namespace)
+      rules:
+        - apiGroups:
+            - ""
+          resources:
+            - configmaps
+          verbs:
+            - list
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: vcluster-provisioner-rb
+        namespace: $(workshop_namespace)
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: Role
+        name: vcluster-provisioner
+      subjects:
+      - kind: ServiceAccount
+        name: kapp-installer
+        namespace: $(workshop_namespace)
     - apiVersion: v1
       kind: Secret
       metadata:
