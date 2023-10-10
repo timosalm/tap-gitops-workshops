@@ -50,6 +50,7 @@ spec:
       kind: ServiceAccount
       metadata:
         name: kapp-installer
+        namespace: $(workshop_namespace)
     - apiVersion: v1
       kind: Secret
       metadata:
