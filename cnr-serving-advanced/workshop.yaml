@@ -3,8 +3,8 @@ kind: Workshop
 metadata:
   name: cnr-serving-advanced
 spec:
-  title: Advanced Knative Serving for Cloud Native Runtimes for VMware Tanzu
-  description: A workshop that presents advanced topics in Knative Serving for users of the Cloud Native Runtimes for VMware Tanzu
+  title: Cloud Native Runtimes for VMware Tanzu - Knative Serving
+  description: A workshop that demonstrates the capabilities of Knative Serving as part of Cloud Native Runtimes for VMware Tanzu
   difficulty: intermediate
   duration: 15m
   url: https://github.com/timosalm/cnr-serving-advanced
@@ -18,10 +18,10 @@ spec:
       - /workshop/**
   session:
     namespaces:
-      budget: xxx-large
-      limits:
-        min:
-          cpu: 25m
+      budget: custom
+      role: view
+      security:
+        policy: baseline
     applications:
       terminal:
         enabled: true
@@ -30,3 +30,27 @@ spec:
         enabled: true
       editor:
         enabled: true
+    objects:
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: Role
+      metadata:
+        name: $(session_namespace)-session
+        namespace: $(session_namespace)
+      rules:
+      - apiGroups: [serving.knative.dev]
+        resources: ['*']
+        verbs: ['*']
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: $(session_namespace)-session-rb
+        namespace: $(session_namespace)
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: Role
+        name: $(session_namespace)-session
+      subjects:
+        - kind: ServiceAccount
+          namespace: $(workshop_namespace)
+          name: $(service_account)
+
