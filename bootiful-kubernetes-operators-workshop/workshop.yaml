@@ -47,6 +47,10 @@ spec:
       mountPath: /opt/kubeconfig
     objects:
     - apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: kapp-installer
+    - apiVersion: v1
       kind: Secret
       metadata:
         name: $(session_name)-contour-vcluster-values
