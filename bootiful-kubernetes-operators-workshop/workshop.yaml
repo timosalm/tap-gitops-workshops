@@ -57,17 +57,44 @@ spec:
         name: vcluster-provisioner
         namespace: $(workshop_namespace)
       rules:
-        - apiGroups:
-            - ""
-          resources:
-            - configmaps
-          verbs:
-            - list
+      - apiGroups:
+        - ""
+        resources:
+        - configmaps
+        - services
+        - serviceaccounts
+        verbs:
+        - '*'
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: RoleBinding
       metadata:
         name: vcluster-provisioner-rb
         namespace: $(workshop_namespace)
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: Role
+        name: vcluster-provisioner
+      subjects:
+      - kind: ServiceAccount
+        name: kapp-installer
+        namespace: $(workshop_namespace)
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: Role
+      metadata:
+        name: vcluster-provisioner
+        namespace: $(session_namespace)
+      rules:
+      - apiGroups:
+        - ""
+        resources:
+        - configmaps
+        verbs:
+        - '*'
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: vcluster-provisioner-rb
+        namespace: $(session_namespace)
       roleRef:
         apiGroup: rbac.authorization.k8s.io
         kind: Role
