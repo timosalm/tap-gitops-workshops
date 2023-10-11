@@ -49,7 +49,7 @@ spec:
     - apiVersion: v1
       kind: ServiceAccount
       metadata:
-        name: kapp-installer
+        name: $(session_name)-kapp-installer
         namespace: $(workshop_namespace)
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: Role
@@ -71,7 +71,7 @@ spec:
         name: vcluster-deployer
       subjects:
       - kind: ServiceAccount
-        name: kapp-installer
+        name: $(session_name)-kapp-installer
         namespace: $(workshop_namespace)
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: Role
@@ -93,7 +93,27 @@ spec:
         name: vcluster-deployer
       subjects:
       - kind: ServiceAccount
-        name: kapp-installer
+        name: $(session_name)-kapp-installer
+        namespace: $(workshop_namespace)
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRole
+      metadata:
+        name: $(session_name)-vcluster-deployer
+      rules:
+      - apiGroups: [rbac.authorization.k8s.io]
+        resources: ['clusterrole','clusterrolebinding']
+        verbs: ['*']
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: $(session_name)-vcluster-deployer-binding
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: $(session_name)-vcluster-deployer
+      subjects:
+      - kind: ServiceAccount
+        name: $(session_name)-kapp-installer
         namespace: $(workshop_namespace)
     - apiVersion: v1
       kind: Secret
@@ -133,7 +153,7 @@ spec:
         name: $(session_name)-contour-vcluster-package
         namespace: $(workshop_namespace)
       spec:
-        serviceAccountName: kapp-installer
+        serviceAccountName: $(session_name)-kapp-installer
         syncPeriod: 720h
         noopDelete: true
         fetch:
