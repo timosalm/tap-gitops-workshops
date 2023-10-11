@@ -115,7 +115,6 @@ spec:
             rawOptions:
             - --app-changes-max-to-keep=5
             - --apply-timeout=30m0s
-            - --wait-resource-timeout=30m0s
             - --wait-timeout=30m0s
     - apiVersion: v1
       kind: Secret
