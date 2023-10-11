@@ -101,7 +101,7 @@ spec:
         name: $(session_name)-vcluster-deployer
       rules:
       - apiGroups: [rbac.authorization.k8s.io]
-        resources: ['clusterrole','clusterrolebinding']
+        resources: [clusterroles,clusterrolebindings]
         verbs: ['*']
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRoleBinding
