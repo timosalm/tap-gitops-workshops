@@ -7,7 +7,7 @@ spec:
   title: "Test of Contour with a virtual cluster"
   description: "Test of installing Contour into a virtual cluster."
   publish:
-    image: ghcr.io/educates/labs-vcluster-testing/lab-contour-vcluster-files:$(workshop_version)
+    image: ghcr.io/educates/labs-vcluster-testing/lab-contour-vcluster-files:1.4
     files:
     - directory:
         path: workshop
@@ -18,7 +18,7 @@ spec:
   workshop:
     files:
     - image:
-        url: ghcr.io/educates/labs-vcluster-testing/lab-contour-vcluster-files:$(workshop_version)
+        url: ghcr.io/educates/labs-vcluster-testing/lab-contour-vcluster-files:1.4
       includePaths:
       - workshop/**
   session:
@@ -195,7 +195,7 @@ spec:
     assets:
       files:
       - image:
-          url: ghcr.io/educates/labs-vcluster-testing/lab-contour-vcluster-files:$(workshop_version) 
+          url: ghcr.io/educates/labs-vcluster-testing/lab-contour-vcluster-files:1.4 
     objects:
     - apiVersion: v1
       kind: ServiceAccount
