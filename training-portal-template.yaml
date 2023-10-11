@@ -85,3 +85,8 @@ spec:
     reserved: 0
     expires: 2h
     orphaned: 1h
+  - name: lab-contour-vcluster
+    capacity: 40
+    reserved: 0
+    expires: 2h
+    orphaned: 1h
