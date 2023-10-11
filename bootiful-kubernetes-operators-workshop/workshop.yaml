@@ -54,7 +54,7 @@ spec:
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: Role
       metadata:
-        name: vcluster-deployer
+        name: $(session_name)-vcluster-deployer
         namespace: $(workshop_namespace)
       rules:
       - apiGroups: ['']
@@ -63,12 +63,12 @@ spec:
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: RoleBinding
       metadata:
-        name: vcluster-deployer-binding
+        name: $(workshop_namespace)vcluster-deployer-binding
         namespace: $(workshop_namespace)
       roleRef:
         apiGroup: rbac.authorization.k8s.io
         kind: Role
-        name: vcluster-deployer
+        name: $(session_name)-vcluster-deployer
       subjects:
       - kind: ServiceAccount
         name: $(session_name)-kapp-installer
