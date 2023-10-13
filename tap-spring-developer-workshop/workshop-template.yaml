@@ -7,13 +7,16 @@ metadata:
 spec:
   title: TAP for Spring Developers
   description: A workshop that demonstrates capabilities of VMware Tanzu Application Platform for Spring developers.
-  vendor: tanzu.vmware.com
-  difficulty: beginner
-  duration: 60m
   url: https://github.com/timosalm/tap-spring-developer-workshop
-  content:
+  workshop:
     image: ghcr.io/timosalm/tap-spring-developer-workshop:educates
-    files: github.com/timosalm/tap-spring-developer-workshop?ref=educates
+    files:
+    - git:
+        url: https://github.com/timosalm/tap-spring-developer-workshop
+        ref: origin/educates
+      includePaths:
+      - /workshop/**
+      - /samples/**
   session:
     namespaces:
       budget: custom
