@@ -18,6 +18,8 @@ spec:
     namespaces:
       budget: custom
       role: view
+      security:
+        policy: baseline
     applications:
       terminal:
         enabled: true
