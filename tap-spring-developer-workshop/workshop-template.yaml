@@ -31,6 +31,8 @@ spec:
         enabled: true
       git:
         enabled: true
+      registry:
+        enabled: true
     env: 
     - name: TAP_INGRESS
       value: #@ data.values.tap.ingress_domain
