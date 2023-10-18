@@ -6,6 +6,6 @@ metadata:
 spec:
   git:
     ref:
-      branch: main
+      branch: educates
     url: https://github.com/timosalm/tap-spring-developer-workshop.git
     subPath: setup/accelerator/source
