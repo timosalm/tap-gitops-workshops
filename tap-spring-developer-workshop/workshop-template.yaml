@@ -43,6 +43,8 @@ spec:
       port: 443
     - name: git-ui
       port: 1234
+    - name: GIT UI
+      url: "$(ingress_protocol)://git-ui-$(session_name).$(ingress_domain)"
     objects:   
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRole
