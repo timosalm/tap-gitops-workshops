@@ -43,6 +43,7 @@ spec:
       port: 443
     - name: git-ui
       port: 1234
+    dashboards:
     - name: GIT UI
       url: "$(ingress_protocol)://git-ui-$(session_name).$(ingress_domain)"
     objects:   
