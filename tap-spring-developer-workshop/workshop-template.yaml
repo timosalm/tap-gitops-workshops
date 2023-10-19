@@ -142,6 +142,16 @@ spec:
         - kind: ServiceAccount
           namespace: $(workshop_namespace)
           name: $(service_account)
+    - apiVersion: v1
+      kind: Secret
+      metadata:
+        annotations:
+          tekton.dev/git-0: $(git_protocol)://$(git_host)
+        name: git-https
+      type: kubernetes.io/basic-auth
+      stringData:
+        username: $(git_username)
+        password: $(git_password)
     - apiVersion: apps/v1
       kind: Deployment
       metadata:
