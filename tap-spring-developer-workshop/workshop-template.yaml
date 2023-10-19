@@ -157,6 +157,8 @@ spec:
       stringData:
         username: $(git_username)
         password: $(git_password)
+        basicauth.username: $(git_username)
+        basicauth.password: $(git_password)
     - apiVersion: apps/v1
       kind: Deployment
       metadata:
