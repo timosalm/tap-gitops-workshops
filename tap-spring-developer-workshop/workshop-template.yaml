@@ -236,6 +236,7 @@ spec:
       metadata:
         name: order-config-slice
       spec:
+        interval: 30s
         configurationSource: config-source
         content:
         - order-service
@@ -253,6 +254,7 @@ spec:
       metadata:
         name: shipping-config-slice
       spec:
+        interval: 30s
         configurationSource: config-source
         content:
         - shipping-service
