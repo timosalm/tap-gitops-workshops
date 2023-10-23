@@ -36,6 +36,8 @@ spec:
     env: 
     - name: TAP_INGRESS
       value: #@ data.values.tap.ingress_domain
+    - name: EDITOR_HOME
+      value: $HOME/spring-cloud-demo.code-workspace 
     ingresses:
     - name: twelve-factors
       protocol: https
