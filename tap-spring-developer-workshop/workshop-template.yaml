@@ -33,6 +33,8 @@ spec:
         enabled: true
       registry:
         enabled: true
+      examiner:
+        enabled: true
     env: 
     - name: TAP_INGRESS
       value: #@ data.values.tap.ingress_domain
