@@ -9,7 +9,7 @@ spec:
   description: A workshop that demonstrates capabilities of VMware Tanzu Application Platform for Spring developers.
   url: https://github.com/timosalm/tap-spring-developer-workshop
   workshop:
-    image: ghcr.io/timosalm/tap-spring-developer-workshop@sha256:fc95965a0ba5271976531aeb14570dfe945266265c24828159a92b4f78bf9f96
+    image: ghcr.io/timosalm/tap-spring-developer-workshop@sha256:e09db93aa2e905ee19bf3749d0f57e0f5036f65180263c4e6ee01e341303945a
     files:
     - git:
         url: https://github.com/timosalm/tap-spring-developer-workshop
