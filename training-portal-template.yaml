@@ -35,3 +35,8 @@ spec:
     reserved: 0
     expires: 3h
     orphaned: 1h
+  - name: bootiful-kubernetes-operators
+    capacity: 40
+    reserved: 0
+    expires: 2h
+    orphaned: 1h
