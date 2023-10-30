@@ -13,10 +13,21 @@ spec:
   difficulty: beginner
   duration: 90m
   url: https://github.com/timosalm/going-serverless-workshop
-  content:
+  workshop:
     image: ghcr.io/timosalm/going-serverless-workshop:main
-    files: github.com/timosalm/going-serverless-workshop:main
+    files:
+    - git:
+        url: https://github.com/timosalm/going-serverless-workshop
+        ref: origin/main
+      includePaths:
+      - /workshop/**
+      - /samples/**
   session:
+    namespaces:
+      budget: custom
+      role: view
+      security:
+        policy: baseline
     resources:
       memory: 10Gi
     applications:
