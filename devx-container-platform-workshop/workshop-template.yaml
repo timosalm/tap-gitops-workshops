@@ -30,6 +30,8 @@ spec:
       terminal:
         enabled: true
         layout: split
+      registry:
+        enabled: true
     env:
     - name: TAP_INGRESS
       value: #@ data.values.tap.ingress_domain
