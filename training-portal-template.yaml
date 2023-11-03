@@ -40,6 +40,11 @@ spec:
     reserved: 0
     expires: 3h
     orphaned: 1h
+  - name: devx-platform
+    capacity: 40
+    reserved: 0
+    expires: 3h
+    orphaned: 1h
   - name: bootiful-kubernetes-operators
     capacity: 40
     reserved: 0
