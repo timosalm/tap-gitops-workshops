@@ -25,6 +25,8 @@ spec:
         enabled: true
       editor:
         enabled: true
+      registry:
+        enabled: true
     env: 
     - name: TAP_INGRESS
       value: #@ data.values.tap.ingress_domain
@@ -147,6 +149,12 @@ spec:
         - kind: ServiceAccount
           namespace: $(workshop_namespace)
           name: $(service_account)
+    - apiVersion: secretgen.carvel.dev/v1alpha1
+      kind: SecretExport
+      metadata:
+        name: educates-registry-credentials
+      spec:
+        toNamespace: $(session_namespace)
     - apiVersion: kappctrl.k14s.io/v1alpha1
       kind: App
       metadata:
@@ -159,6 +167,20 @@ spec:
             ref: origin/main
             subPath: samples/workload-gitops
         template:
-        - ytt: {}
+        - ytt:
+            inline:
+              paths:
+                add-registry.yml: |
+                  #@ load("@ytt:overlay", "overlay")
+                  #@overlay/match by=overlay.subset({"kind":"Workload"})
+                  ---
+                  spec:
+                    #@overlay/match missing_ok=True
+                    params:
+                    #@overlay/append
+                    - name: registry
+                      value:
+                        server: $(registry_host)
+                        repository: workloads
         deploy:
         - kapp: {}
