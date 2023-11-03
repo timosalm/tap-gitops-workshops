@@ -102,6 +102,12 @@ spec:
       - kind: Group
         name: system:serviceaccounts:$(workshop_namespace)
         apiGroup: rbac.authorization.k8s.io
+    - apiVersion: secretgen.carvel.dev/v1alpha1
+      kind: SecretExport
+      metadata:
+        name: educates-registry-credentials
+      spec:
+        toNamespace: $(session_namespace)
     - apiVersion: v1
       kind: Namespace
       metadata:
