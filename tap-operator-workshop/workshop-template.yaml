@@ -11,12 +11,21 @@ spec:
   difficulty: beginner
   duration: 60m
   url: https://github.com/timosalm/tap-operator-workshop
-  content:
+  workshop:
     image: ghcr.io/timosalm/tap-operator-workshop:main
-    files: github.com/timosalm/tap-operator-workshop?ref=main
+    files:
+    - git:
+        url: https://github.com/timosalm/tap-operator-workshop
+        ref: origin/main
+      includePaths:
+      - /workshop/**
+      - /samples/**
   session:
     namespaces:
       budget: custom
+      role: view
+      security:
+        policy: baseline
     applications:
       terminal:
         enabled: true
@@ -49,9 +58,12 @@ spec:
         - ''
         resources:
         - pods
+        - configmaps
         verbs:
         - 'get'
         - 'list'
+        - 'create'
+        - 'update'
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: RoleBinding
       metadata:
