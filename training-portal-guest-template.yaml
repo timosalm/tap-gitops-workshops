@@ -13,7 +13,7 @@ spec:
     updates:
       workshop: true
     title: Interactive Workshops for VMware Tanzu
-    password: #@ data.values.training_portal_password
+    password: #@ data.values.training_portal.guestPassword
     registration:
       type: anonymous
     #@ if hasattr(data.values, "training_portal"):
