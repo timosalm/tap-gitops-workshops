@@ -136,9 +136,12 @@ spec:
       - apiGroups: [autoscaling.internal.knative.dev]
         resources: [podautoscalers]
         verbs: ["get", "watch", "list"] 
+      - apiGroups: [apis.apps.tanzu.vmware.com]
+        resources: [apidescriptors,curatedapidescriptors]
+        verbs: ["get", "watch", "list"] 
       - apiGroups: [service-registry.spring.apps.tanzu.vmware.com]
         resources: [eurekaservers]
-        verbs: ['*']          
+        verbs: ["*"]          
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: RoleBinding
       metadata:
