@@ -31,7 +31,9 @@ spec:
   - name: tap-spring-dev-workshop
     capacity: 40
     reserved: 0
-    expires: 3h
+    overtime: 30m
+    deadline: 8h
+    expires: 4h
     orphaned: 1h
   - name: going-serverless
     capacity: 40
